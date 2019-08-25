@@ -1,0 +1,40 @@
+;PRGM NO.:4/O
+;CREATED ON: 30.07.2019
+;PROGRAMMER P.K.
+		
+.equ DDRB, 0x17
+.equ PORTB, 0x18			
+	
+
+.macro DELAY 
+			LDI R18, 0
+			LOOP:
+			LDI R19, 0
+			CHECKPOINT:
+			CPI R19, 255
+			BRNE LOOP1
+			BREQ LOOP2
+			COMPARE:
+			CPI R18, @0
+			BRLO LOOP
+			BREQ CHAKA
+			LOOP1:
+			INC R19
+			RJMP CHECKPOINT
+			LOOP2:
+			INC R18
+			RJMP COMPARE
+			CHAKA:
+.endmacro
+	
+		
+MAIN:
+		LDI R16, 255
+LOL:
+		OUT DDRB, R16
+		OUT PORTB, R16
+		DELAY  5
+		INC R16
+		RJMP LOL
+
+
